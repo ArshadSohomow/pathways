@@ -1,0 +1,26 @@
+{
+  "name": "pathways",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pathways — a nature-inspired healthcare journey and care-coordination prototype (synthetic data only).",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/build.mjs --watch",
+    "build": "node scripts/build.mjs",
+    "validate": "tsx scripts/validate.ts",
+    "typecheck": "tsc --noEmit",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name pathways-demo"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "esbuild": "^0.28.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "wrangler": "^4.0.0"
+  }
+}
