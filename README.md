@@ -6,7 +6,9 @@ Pathways is an interactive service-design prototype. It turns fragmented healthc
 
 > **Demonstration only.** Every person, organisation, identifier, phone number and record is fictional. It is not an NHS service and is not connected to any clinical system. The Patient / Professional switch is a demo control. It is not authentication.
 
-**Live demo:** https://pathways-demo-5ds.pages.dev
+**Live demo:** https://pathways-demo-5ds.pages.dev — opens on a landing page where you choose a demo patient and a view (patient or professional).
+
+![Pathways landing page](docs/screenshots/landing.png)
 
 ![Patient overview with the illustrated journey](docs/screenshots/overview.png)
 

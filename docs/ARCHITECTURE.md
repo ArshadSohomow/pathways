@@ -58,7 +58,7 @@ The rules are deterministic, documented in the UI (Outstanding Actions → Detec
 
 ## Routing and state
 
-Routes are hash-based (`#/{patient|pro}/{patientId}/{page}?lm={landmarkId}`), so the static build works on any host. The detail panel is a stack, so related records can be followed and the Back button returns through them. Esc closes the panel and focus goes back to the element that opened it.
+The site root (`/` or `#/`) is a landing page (`src/pages/Home.tsx`) with no patient record open; a record opens only from an explicit route. Record routes are hash-based (`#/{patient|pro}/{patientId}/{page}?lm={landmarkId}`), so the static build works on any host. The detail panel is a stack, so related records can be followed and the Back button returns through them. Esc closes the panel and focus goes back to the element that opened it.
 
 ## Validation
 

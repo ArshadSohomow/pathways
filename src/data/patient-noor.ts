@@ -24,6 +24,8 @@ export const noor: PatientDataset = {
     phone: "07700 900 263",
     email: "noor.c@example.com",
     gpOrganisationId: "org-willowmere",
+    demoTeaser:
+      "A shorter, mostly well-coordinated asthma journey with an emergency visit in Lisbon, a specialist assessment and a care period whose start date isn't recorded.",
     summaryForPatient:
       "Your records show ongoing asthma care with your GP, an emergency visit in Lisbon, an assessment with the hospital's respiratory team and a completed course of private physiotherapy. Your next review is booked.",
   },

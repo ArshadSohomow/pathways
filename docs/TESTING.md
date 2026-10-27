@@ -10,7 +10,11 @@
 
 ## Acceptance tasks (from the specification)
 
-Last run against the production build: **27 / 27 passed**.
+Last run against the production build: **28 / 28 passed**.
+
+**Landing page**
+
+- The site root shows the landing page with three demo journeys and no patient record open. Each card opens the chosen record and view, and the logo returns to the landing page.
 
 **Patient tasks**
 

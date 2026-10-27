@@ -29,6 +29,7 @@ export const PRO_PAGES = [
 ] as const;
 
 interface Ctx {
+  home: boolean; // true on the landing page (no patient record open)
   mode: Mode;
   patientId: string;
   page: string;
@@ -46,6 +47,7 @@ interface Ctx {
   showOnJourney: (landmarkId: string) => void;
   setHighlight: (id: string | null) => void;
   t: (patientText: string | undefined, proText: string) => string; // pick wording by mode
+  enter: (mode: Mode, patientId: string) => void; // open a patient record from the landing page
 }
 
 const AppCtx = createContext<Ctx | null>(null);
@@ -55,16 +57,18 @@ export const useApp = () => {
   return c;
 };
 
-function parseHash(): { mode: Mode; patientId: string; page: string; lm: string | null } {
+function parseHash(): { home: boolean; mode: Mode; patientId: string; page: string; lm: string | null } {
   const raw = window.location.hash.replace(/^#\/?/, "");
   const [path, query] = raw.split("?");
   const [m, p, pg] = path.split("/");
+  // The landing page lives at the site root ("/", "#/" or "#/home"). A record only opens from an explicit route.
+  const home = m !== "patient" && m !== "pro";
   const mode: Mode = m === "pro" ? "pro" : "patient";
   const patientId = PATIENT_IDS.includes(p) ? p : PATIENT_IDS[0];
   const pages = (mode === "pro" ? PRO_PAGES : PATIENT_PAGES).map((x) => x.key as string);
   const page = pages.includes(pg) ? pg : "overview";
   const lm = new URLSearchParams(query ?? "").get("lm");
-  return { mode, patientId, page, lm };
+  return { home, mode, patientId, page, lm };
 }
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
@@ -79,12 +83,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       if (r.lm) setHighlight(r.lm);
     };
     window.addEventListener("hashchange", onHash);
-    if (!window.location.hash) window.history.replaceState(null, "", `#/patient/${PATIENT_IDS[0]}/overview`);
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
   // Navigating to another page, view or patient closes any open detail panel.
-  useEffect(() => { setPanel([]); }, [route.page, route.mode, route.patientId]);
+  useEffect(() => { setPanel([]); }, [route.page, route.mode, route.patientId, route.home]);
 
   const repo = useMemo(() => getRepo(route.patientId), [route.patientId]);
   const gaps = useMemo(() => detectGaps(repo), [repo]);
@@ -111,8 +114,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setHighlight(lmId);
     nav(route.mode, route.patientId, "journey", lmId);
   }, [nav, route]);
+  const enter = useCallback((m: Mode, id: string) => { setHighlight(null); nav(m, id, "overview"); window.scrollTo({ top: 0 }); }, [nav]);
   const t = useCallback((p: string | undefined, pro: string) => (route.mode === "patient" && p ? p : pro), [route.mode]);
 
-  const value: Ctx = { ...route, repo, gaps, landmarks, panel, highlight, go, setMode, setPatient, open, back, close, showOnJourney, setHighlight, t };
+  const value: Ctx = { ...route, repo, gaps, landmarks, panel, highlight, go, setMode, setPatient, open, back, close, showOnJourney, setHighlight, t, enter };
   return <AppCtx.Provider value={value}>{children}</AppCtx.Provider>;
 }

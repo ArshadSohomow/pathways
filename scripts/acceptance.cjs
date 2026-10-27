@@ -19,6 +19,16 @@ const assert = (c, m) => { if (!c) throw new Error(m); };
   const panelText = () => p.locator(".panel").innerText();
   const close = () => p.keyboard.press("Escape");
 
+  await check("H Landing page opens with no patient record", async () => {
+    await p.goto(BASE.replace(/#\/$/, "")); await p.waitForTimeout(400);
+    const h = await p.locator("h1").innerText(); const cards = await p.locator(".pcard").count();
+    assert(/healthcare journey, connected/.test(h) && cards === 3 && (await p.locator(".idbar").count()) === 0, "landing");
+    await p.getByRole("button", { name: /Open Noor Castellan's journey in the patient view/ }).click(); await p.waitForTimeout(300);
+    assert(/#\/patient\/pt-noor\/overview/.test(p.url()), p.url());
+    await p.getByRole("link", { name: "Pathways home" }).click(); await p.waitForTimeout(300);
+    assert((await p.locator(".pcard").count()) === 3, "back home"); return "Root shows landing page with 3 demo journeys; cards open records; logo returns home";
+  });
+
   // ---------------- patient tasks
   await check("P1 Understand the current recorded stage", async () => {
     await go("patient/pt-imogen/overview");

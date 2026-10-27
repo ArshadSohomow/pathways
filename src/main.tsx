@@ -4,6 +4,7 @@ import { AppProvider, useApp } from "./context";
 import { Shell } from "./components/Shell";
 import { DetailPanel } from "./components/DetailPanel";
 import { Overview } from "./pages/Overview";
+import { Home } from "./pages/Home";
 import { Journey, Appointments, Encounters, Referrals, Medications, Teams, Documents, Records, Details, Actions, Audit } from "./pages/Pages";
 import "./styles.css";
 
@@ -13,7 +14,8 @@ const PAGES: Record<string, () => JSX.Element> = {
 };
 
 function Router() {
-  const { page, mode, patientId } = useApp();
+  const { page, mode, patientId, home } = useApp();
+  if (home) return <Home />;
   const Page = PAGES[page] ?? Overview;
   return (
     <Shell>

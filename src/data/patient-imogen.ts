@@ -33,6 +33,8 @@ export const imogen: PatientDataset = {
     email: "imogen.h@example.com",
     gpOrganisationId: "org-willowmere",
     communicationNeeds: "Prefers letters by email. No interpreter needed.",
+    demoTeaser:
+      "A complex journey across GP, hospital, community, private and overseas care: a specialist referral, a parallel mental health pathway, an emergency admission, a medication discrepancy and an unreviewed referral.",
     summaryForPatient:
       "Your records show care from your GP, the hospital's gut (gastroenterology) team, a community mental health team, community IBD nurses and a private dietitian. One recent referral has not yet been reviewed.",
   },

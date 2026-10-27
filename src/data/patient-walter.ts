@@ -24,6 +24,8 @@ export const walter: PatientDataset = {
     phone: "01632 960 077",
     gpOrganisationId: "org-heronbridge",
     communicationNeeds: "Hearing aids: please speak clearly. Daughter (Margaret) helps with appointments, with Walter's consent.",
+    demoTeaser:
+      "An older adult's fall and hip fracture, a hospital stay, and a rehabilitation referral the receiving team never recorded — a handover gap made visible.",
     summaryForPatient:
       "Your records show a hospital stay after a fall and a broken hip. A referral for rehabilitation at home was sent when you left hospital, but the rehabilitation team has not recorded receiving it.",
   },

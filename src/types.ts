@@ -22,6 +22,7 @@ export interface Patient {
   gpOrganisationId: string;
   communicationNeeds?: string;
   summaryForPatient: string; // short plain-language framing of the journey
+  demoTeaser: string; // third-person description used on the landing page
 }
 
 export type OrganisationType =

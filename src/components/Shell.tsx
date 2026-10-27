@@ -112,7 +112,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
       <header className="topbar">
         <div className="topbar__brand">
           <button type="button" className="iconbtn navtoggle" aria-expanded={navOpen} aria-controls="sidenav" onClick={() => setNavOpen(!navOpen)} aria-label="Menu"><IconMenu size={20} /></button>
-          <a href={`#/${mode}/${patientId}/overview`} className="brand"><Logo /><span className="brand__name">Pathways</span></a>
+          <a href="#/" className="brand" aria-label="Pathways home"><Logo /><span className="brand__name">Pathways</span></a>
           <span className="brand__sub">{mode === "pro" ? "Care Coordination" : "My Journey"}</span>
         </div>
         <GlobalSearch />
@@ -153,6 +153,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
               );
             })}
           </ul>
+          <a href="#/" className="sidenav__home">← All demo journeys</a>
           <p className="sidenav__note">The view switch is a demonstration feature. It is not a log-in and does not enforce any permissions.</p>
         </nav>
         <main id="main" className="main" tabIndex={-1}>{children}</main>
